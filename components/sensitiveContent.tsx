@@ -1,15 +1,23 @@
 import { Image } from "@heroui/image";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { InfoIcon } from "./icons";
 import { Button } from "@heroui/button";
 import { motion, AnimatePresence } from "framer-motion";
 
-const SensitiveContent = ({imageUrl, isVideo=false}:{imageUrl:string; isVideo?:boolean }) => {
+const SensitiveContent = ({ imageUrl, isVideo = false }: { imageUrl: string; isVideo?: boolean }) => {
     const [showContent, setShowContent] = useState(false);
+    const videoRef = useRef<HTMLVideoElement>(null);
 
     const onChange = () => {
         setShowContent(true);
     };
+
+    useEffect(()=>{
+        if (isVideo === true && videoRef.current) {
+            videoRef.current.play();
+        }
+    },[showContent])
+
 
     return (
         <div className={`relative w-full h-[400px] md:h-full`}>
@@ -25,11 +33,11 @@ const SensitiveContent = ({imageUrl, isVideo=false}:{imageUrl:string; isVideo?:b
                             stiffness: 400,
                             damping: 40,
                         }}
-                        className={`absolute gap-6 backdrop-blur-2xl h-full h-full w-full z-10 flex items-center justify-center flex-col rounded-xl`}
+                        className={`absolute gap-6 backdrop-blur-2xl h-full w-full z-10 flex items-center justify-center flex-col rounded-xl`}
                     >
                         <InfoIcon />
                         <h1 className="font-semibold text-foreground sm:text-xl md:text-6xl">Sensitive Content</h1>
-                        <p style={{maxWidth:"90%"}} className="text-foreground/60 w-[450px] text-wrap text-center font-normal">
+                        <p style={{ maxWidth: "90%" }} className="text-foreground/60 w-[450px] text-wrap text-center font-normal">
                             By clicking on the watch button you confirm that you are ready to watch nudity, sexual activity, etc.
                         </p>
 
@@ -45,26 +53,30 @@ const SensitiveContent = ({imageUrl, isVideo=false}:{imageUrl:string; isVideo?:b
                     </motion.div>
                 )}
             </AnimatePresence>
-            
-            {isVideo ? 
-                    /* eslint-disable jsx-a11y/media-has-caption */
 
-                <video autoPlay className="md:h-[600px] h-[400px]" style={{ width:"100%",objectFit:"cover", borderRadius:"30px"}} controls>
-                <source src={imageUrl} type="video/webm" />
+            {isVideo ? (
+                /* eslint-disable jsx-a11y/media-has-caption */
+                <video
+                    ref={videoRef} // Reference to the video element
+                    className="md:h-[600px] h-[400px]"
+                    style={{ width: "100%", objectFit: "cover", borderRadius: "30px" }}
+                    muted // Add muted if you want the video to play automatically without sound
+                    loop
+                    
+                >
+                    <source src={imageUrl} type="video/webm" />
                 </video>
-        :
-        <Image
-                alt="HeroUI hero Image"
-                src={imageUrl}
-                className="w-full h-full z-0"
-                classNames={{
-                    wrapper: "w-full maxcontentimportant h-full",
+            ) : (
+                <Image
+                    alt="HeroUI hero Image"
+                    src={imageUrl}
+                    className="w-full h-full z-0"
+                    classNames={{
+                        wrapper: "w-full maxcontentimportant h-full",
+                    }}
+                />
+            )}
 
-                }}
-            />
-        }
-        
-            
         </div>
     );
 };
