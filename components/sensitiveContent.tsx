@@ -49,7 +49,7 @@ const SensitiveContent = ({imageUrl, isVideo=false}:{imageUrl:string; isVideo?:b
             {isVideo ? 
                     /* eslint-disable jsx-a11y/media-has-caption */
 
-                <video className="md:h-[600px] h-[400px]" style={{ width:"100%",objectFit:"cover", borderRadius:"30px"}} controls>
+                <video autoPlay className="md:h-[600px] h-[400px]" style={{ width:"100%",objectFit:"cover", borderRadius:"30px"}} controls>
                 <source src={imageUrl} type="video/webm" />
                 </video>
         :

@@ -18,7 +18,7 @@ import {
 export const Navbar = () => {
 
   return (
-    <HeroUINavbar isBlurred style={{paddingTop:"15px",paddingBottom:"15px"}} maxWidth="xl" position="sticky">
+    <HeroUINavbar isBlurred style={{paddingTop:"15px",paddingBottom:"15px"}} maxWidth="full" position="sticky">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand className="gap-3 max-w-fit">
           <NextLink className="flex justify-start items-center gap-1" href="/">

@@ -3,6 +3,7 @@ import { BoobsIcon, FigureIcon, SexualityIcon } from "@/components/icons";
 import SensitiveContent from "@/components/sensitiveContent";
 import { Button } from "@heroui/button";
 import { Image } from "@heroui/image";
+import Link from "next/link";
 
 const CustomizeGirlSection = () => {
     return <section className="relative isolate flex pb-8 flex-col items-center px-6 lg:px-8">
@@ -34,7 +35,7 @@ const CustomizeGirlSection = () => {
       </h1>
 
       <div className="flex flex-wrap gap-4 items-center mt-6">
-        <Button radius="lg" variant="bordered" className="text-foreground uppercase px-[38px] py-[25px] rounded-[35px]" color="secondary">DOWNLOAD NOW</Button>
+        <Button as={Link} radius="lg" variant="bordered" className="text-foreground uppercase px-[38px] py-[25px] rounded-[35px]" href="/download" color="secondary">DOWNLOAD NOW</Button>
         <Button radius="lg" className="text-foreground uppercase px-[38px] py-[25px] rounded-[35px]" color="primary">Create your girl</Button>
       </div>
     </div>
